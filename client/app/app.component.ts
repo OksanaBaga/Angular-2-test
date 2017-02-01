@@ -1,36 +1,42 @@
 import { Component } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { browser, element, by } from 'protractor';
+import 'rxjs/add/operator/map';
+import {HttpService} from './services';
 
 @Component({
-  selector: 'my-app',
+  selector: 'my-app',  
   templateUrl: `app/app.component.html`,
+  providers: [HttpService] 
 })
-export class AppComponent {
-  constructor(public http: Http) {
+export class AppComponent implements OnInit { 
+  
+    accounts: [];
+     
+    constructor(private httpService: HttpService){}
+    ngOnInit(){
+         
+        this.httpService.getData()
+                        .subscribe((data: Response) => {
+                          this.accounts=data.json().success;
+                          console.log(this.accounts)
+                        }));
+    }
 
-  }
-
-  ngAfterContentInit(): void {
-    // this.http.get('/lists', (res:Response) => res.json()).subscribe(
-    // 		(res: any) => {
-    // 			if(res){						
-    // 				console.log(res)
-    // 			}else{
-    // 				console.log(res)
-    // 			}
-    // 		},
-    // 		(error: any) => {
-    // 			console.log(error.json());
-    // });
-
-    this.http.get('/lists')
-    .map(res => res.text())
-    .subscribe(
-      data => console.log(data),
-      err => console.log(err),
-      () => console.log('Random Quote Complete')
-    );
-  }
+    add(){
+      var data = {
+        id: 3, 
+        accountName: "Test 3", 
+        address: "USA", 
+        phone: "443", 
+        fax: "test@com", 
+        city:"New-York", 
+        info:"test", 
+        contactName:"Andrew"
+      }
+      this.httpService.addData(data)
+                        .subscribe((data: Response) => {
+                          // this.accounts=data.json().success;
+                          console.log(data)
+                        }));
+    }
 }
 

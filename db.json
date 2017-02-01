@@ -1,1 +1,13 @@
-{}
+{
+  "accounts": [
+    { "id": 1, "accountName": "Test 1", "address": "USA", "phone": "21324", "fax": "test@com", "city":"New-York", "info":"test", "contactName":"Rick"},
+    { "id": 2, "accountName": "Test 2", "address": "USA", "phone": "555", "fax": "test@com", "city":"New-York", "info":"test", "contactName":"Mary"}
+  ],
+  "posts": [
+    { "id": 1, "title": "json-mock", "body":"The internet is cool!", "author": "therebelrobot", "userId": 1 }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment from author", "votes": 20, "postId": 1, "userId": 1 },
+    { "id": 2, "body": "some comment from visitor", "votes": 15, "postId": 1, "userId": 2 }
+  ]
+}

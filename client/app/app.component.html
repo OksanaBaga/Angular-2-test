@@ -13,15 +13,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><button>Add</button><button>Edit</button><button>Delete</button></td>
+            <tr *ngFor="let account of accounts">
+                <td>{{account.accountName}}</td>
+                <td>{{account.address}}</td>
+                <td>{{account.phone}}</td>
+                <td>{{account.fax}}</td>
+                <td>{{account.city}}</td>
+                <td>{{account.info}}</td>
+                <td>{{account.contactName}}</td>
+                <td>
+                    <button class="btn btn-xs btn-default" (click)="add()">Add</button>
+                    <button class="btn btn-xs btn-default">Edit</button>
+                    <button class="btn btn-xs btn-default">Delete</button></td>
             </tr>
         </tbody>
     </table>

@@ -7,8 +7,6 @@ function getList(req, res) {
         error: null,
     };
 
-    var agent = req.body.agentData;
-
     service.getList().then(
         success => {
             result.success = success;
@@ -20,6 +18,24 @@ function getList(req, res) {
         });
 };
 
+function addAccount(req, res, next){
+    var result = {
+        success: false,
+        error: null,
+    };
+console.log(req.body)
+    service.addAccount(req.body).then(
+        success => {
+            result.success = success;
+            res.send(result);
+        },
+        error => {
+            result.error = error;
+            res.send(result);
+        });
+}
+
 module.exports = {
-    getList: getList
+    getList: getList,
+    addAccount: addAccount
 }
