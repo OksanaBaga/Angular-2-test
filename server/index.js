@@ -13,7 +13,7 @@ module.exports = {
         app.use(express.static(path.join(__dirname, '../node_modules')));
 
         app.get('/get', api.getList);
-        app.post('/add', api.addAccount);
+        app.post('/add/:account', api.addAccount);
 
         router.get('/', function (req, res) {
             res.sendFile(path.join(__dirname, "../../client/index.html"));
@@ -22,6 +22,6 @@ module.exports = {
         http.createServer(app).listen(app.get('port'), () => {
             console.log('Express HTTP server listening on port ' + app.get('port') + '...');
         });
-
+        
     }
 }

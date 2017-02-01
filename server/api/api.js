@@ -18,13 +18,13 @@ function getList(req, res) {
         });
 };
 
-function addAccount(req, res, next){
+function addAccount(req, res, next) {
     var result = {
         success: false,
         error: null,
     };
-console.log(req.body)
-    service.addAccount(req.body).then(
+    var account = JSON.parse(req.params.account);
+    service.addAccount(account).then(
         success => {
             result.success = success;
             res.send(result);
