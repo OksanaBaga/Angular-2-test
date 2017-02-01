@@ -17,7 +17,6 @@ export class HttpService{
     addData(data){        
          this.http.post('/add/' + JSON.stringify(data))
           .subscribe(res => {
-                console.log('res', res)
                 this._router.navigate(['']);
           }, error => {
               console.log(JSON.stringify(error.json()));
@@ -27,7 +26,6 @@ export class HttpService{
     editData(data){
         this.http.post('/edit/' + JSON.stringify(data))
           .subscribe(res => {
-                console.log('res', res)
                 this._router.navigate(['']);
           }, error => {
               console.log(JSON.stringify(error.json()));
@@ -35,13 +33,7 @@ export class HttpService{
     }
 
     deleteData(data){
-        this.http.post('/delete/' + JSON.stringify(data))
-          .subscribe(res => {
-                console.log('res', res)
-                this._router.navigate(['']);
-          }, error => {
-              console.log(JSON.stringify(error.json()));
-          });
+        return this.http.post('/delete/' + JSON.stringify(data));
     }
     
 }

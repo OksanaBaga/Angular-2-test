@@ -1,40 +1,39 @@
 import { Component } from '@angular/core';
 import 'rxjs/add/operator/map';
-import {HttpService} from './services';
-import { Router } from '@angular/router';
+import { HttpService } from './services';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'main',  
-  templateUrl: `app/main.component.html`,
-  providers: [HttpService]  
+    selector: 'main',
+    templateUrl: `app/main.component.html`,
+    providers: [HttpService]
 })
-export class MainComponent { 
-  
+export class MainComponent {
+
     accounts: [];
-     
-    constructor(private httpService: HttpService, private _router:Router){}
-    ngOnInit(){
-         
+
+    constructor(private httpService: HttpService, private _router: Router, private route: ActivatedRoute, ) { }
+    ngOnInit() {
+
         this.httpService.getData()
-                        .subscribe((data: Response) => {
-                          this.accounts=data.json().success;
-                          console.log(this.accounts)
-                        });
+            .subscribe((data: Response) => {
+                this.accounts = data.json().success;
+            });
     }
 
-    goToAdd(){
-        this._router.navigate(['add']);      
+    goToAdd() {
+        this._router.navigate(['add']);
     }
 
-    goToEdit(account){
-        console.log(account)
-        account.address = 'City';
-        this.httpService.editData(account);
+    goToEdit(account) {
+        var obj = JSON.stringify(account);
+        this._router.navigate(['edit', { account: obj }], { relativeTo: this.route });
     }
 
-    deleteAccount(account){
-        console.log(account)
-        this.httpService.deleteData(account);
+    deleteAccount(account) {
+        this.httpService.deleteData(account).subscribe((data: Response) => {
+            this.accounts = data.json().success;
+        });
     }
 }
 

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { HttpService } from './services';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'add-account',
-    templateUrl: `app/addAccount.component.html`,
+    templateUrl: `app/editAccount.component.html`,
     providers: [HttpService]
 })
-export class AddAccountComponent {
+export class EditAccountComponent {
 
     account: {
         id: any,
@@ -17,11 +18,11 @@ export class AddAccountComponent {
         city: any,
         info: any,
         contactName: any
-    };
+    }
 
-    constructor(private httpService: HttpService) {
+    constructor(private route: ActivatedRoute, private httpService: HttpService) {
         this.account = {
-            id: this.makeid(),
+            id: 0,
             accountName: "",
             address: "",
             phone: "",
@@ -30,19 +31,17 @@ export class AddAccountComponent {
             info: "",
             contactName: ""
         }
+     }
+
+    ngOnInit() {
+        this.route.params
+            .map(params => params['account'])
+            .subscribe((account) => {
+                this.account = JSON.parse(account);
+            });
     }
 
     submit() {
-        this.httpService.addData(this.account);
-    }
-
-    makeid() {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for (var i = 0; i < 5; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-        return text;
+        this.httpService.editData(this.account);
     }
 }
