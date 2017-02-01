@@ -14,6 +14,8 @@ module.exports = {
 
         app.get('/get', api.getList);
         app.post('/add/:account', api.addAccount);
+        app.post('/edit/:account', api.editAccount);
+        app.post('/delete/:account', api.deleteAccount);
 
         router.get('/', function (req, res) {
             res.sendFile(path.join(__dirname, "../../client/index.html"));

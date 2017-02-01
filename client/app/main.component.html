@@ -22,9 +22,9 @@
                 <td>{{account.info}}</td>
                 <td>{{account.contactName}}</td>
                 <td>
-                    <button class="btn btn-xs btn-default" (click)="add()">Add</button>
-                    <button class="btn btn-xs btn-default">Edit</button>
-                    <button class="btn btn-xs btn-default">Delete</button></td>
+                    <button class="btn btn-xs btn-default" (click)="goToAdd()">Add</button>
+                    <button class="btn btn-xs btn-default" (click)="goToEdit(account)">Edit</button>
+                    <button class="btn btn-xs btn-default"(click)="deleteAccount(account)">Delete</button></td>
             </tr>
         </tbody>
     </table>

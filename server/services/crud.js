@@ -16,13 +16,37 @@ function getList() {
 
 function addAccount(account) {
     var deferedObject = q.defer();
-    // db.accounts.push(account);
+    db.accounts.push(account);
     // jsonfile.writeFileSync(file, account, {flag: 'a'})
+    deferedObject.resolve(db.accounts);
+    return deferedObject.promise;
+}
+
+function deleteAccount(account) {
+    var deferedObject = q.defer();
+    db.accounts.map((x => {
+        if(x.id == account.id){
+            db.accounts.remove(x)
+        }
+    }))
+    deferedObject.resolve(db.accounts);
+    return deferedObject.promise;
+}
+
+function editAccount(account) {
+    var deferedObject = q.defer();
+    db.accounts.map((x => {
+        if(x.id == account.id){
+            x = account;
+        }
+    }))
     deferedObject.resolve(db.accounts);
     return deferedObject.promise;
 }
 
 module.exports = {
     getList: getList,
-    addAccount: addAccount
+    addAccount: addAccount,
+    editAccount: editAccount,
+    deleteAccount: deleteAccount
 }

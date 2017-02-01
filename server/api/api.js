@@ -35,7 +35,44 @@ function addAccount(req, res, next) {
         });
 }
 
+
+function deleteAccount(req, res, next) {
+    var result = {
+        success: false,
+        error: null,
+    };
+    var account = JSON.parse(req.params.account);
+    service.deleteAccount(account).then(
+        success => {
+            result.success = success;
+            res.send(result);
+        },
+        error => {
+            result.error = error;
+            res.send(result);
+        });
+}
+
+function editAccount(req, res, next) {
+    var result = {
+        success: false,
+        error: null,
+    };
+    var account = JSON.parse(req.params.account);
+    service.editAccount(account).then(
+        success => {
+            result.success = success;
+            res.send(result);
+        },
+        error => {
+            result.error = error;
+            res.send(result);
+        });
+}
+
 module.exports = {
     getList: getList,
-    addAccount: addAccount
+    addAccount: addAccount,
+    editAccount: editAccount,
+    deleteAccount: deleteAccount
 }
